@@ -9,12 +9,28 @@
   </head>
   <body>
     <img class="logo" src="img/logo.png" />
-    <p>Pick colors from website and images</p>
-    <form>
-      <div class="url"><span>URL</span><input /></div>
-      <div class="buttons">
-        <button><img src="img/camera.svg" /></button>
-        <button><img src="img/search.svg" /></button>
+
+    <p class="desc">Pick colors from websites and images</p>
+
+    <form id="searchForm">
+      <div class="url">
+        <span>URL</span>
+        <input
+          type="url"
+          name="url"
+          id="url"
+          placeholder="https://google.com"
+        />
+      </div>
+
+      <div class="buttonWrapper">
+        <div class="button" id="cameraButton">
+          <img src="img/camera.svg" />
+        </div>
+
+        <button class="button" id="searchButton">
+          <img src="img/search.svg" />
+        </button>
       </div>
     </form>
 
