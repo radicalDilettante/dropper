@@ -1,16 +1,19 @@
 const searchForm = document.getElementById("searchForm");
-const cameraButton = document.getElementById("cameraButton");
-const urlInput = document.getElementById("urlInput");
 
-const imageLoader = document.getElementById("imageLoader");
-const imageLoaderClose = document.getElementById("imageLoaderClose");
+const urlInput = document.getElementById("urlInput");
+const cameraButton = document.getElementById("cameraButton");
+
+const imageFile = document.getElementById("imageFile");
+
 const imageUrlHeader = document.getElementById("imageUrlHeader");
 const imageFileHeader = document.getElementById("imageFileHeader");
 const imageUrlLoader = document.getElementById("imageUrlLoader");
-const imageFileLoader = document.getElementById("imageFileLoader");
-
 const imageUrlLoaderForm = document.getElementById("imageUrlLoaderForm");
 const imageUrlInput = document.getElementById("imageUrlInput");
+
+const imageFileLoader = document.getElementById("imageFileLoader");
+
+const imageFileClose = document.getElementById("imageFileClose");
 
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -25,12 +28,12 @@ searchForm.addEventListener("submit", (e) => {
 
 cameraButton.addEventListener("click", (e) => {
   e.preventDefault();
-  imageLoader.classList.remove("hide");
+  imageFile.classList.remove("hide");
 });
 
-imageLoaderClose.addEventListener("click", (e) => {
+imageFileClose.addEventListener("click", (e) => {
   e.preventDefault();
-  imageLoader.classList.add("hide");
+  imageFile.classList.add("hide");
 });
 
 imageUrlHeader.addEventListener("click", (e) => {
