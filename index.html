@@ -8,32 +8,63 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
-    <img class="logo" src="img/logo.png" />
+    <div class="container">
+      <img class="logo" src="img/logo.png" />
 
-    <p class="desc">Pick colors from websites and images</p>
+      <p class="desc">Pick colors from websites and images</p>
 
-    <form id="searchForm">
-      <div class="url">
-        <span>URL</span>
-        <input
-          type="url"
-          name="url"
-          id="url"
-          placeholder="https://google.com"
-        />
-      </div>
-
-      <div class="buttonWrapper">
-        <div class="button" id="cameraButton">
-          <img src="img/camera.svg" />
+      <form id="searchForm" class="searchForm">
+        <div class="url">
+          <span>URL</span>
+          <input
+            type="url"
+            name="url"
+            id="urlInput"
+            placeholder="https://google.com"
+          />
         </div>
 
-        <button class="button" id="searchButton">
-          <img src="img/search.svg" />
+        <div class="buttonWrapper">
+          <div class="button" id="cameraButton">
+            <img src="img/camera.svg" />
+          </div>
+
+          <button class="button">
+            <img src="img/search.svg" />
+          </button>
+        </div>
+      </form>
+
+      <div id="imageLoader" class="imageLoader hide">
+        <p class="imageLoaderHeader">Search by image</p>
+        <p class="imageLoaderDesc">
+          Search Google with an image instead of text. Try dragging an image
+          here.
+        </p>
+        <div class="imageLoaderMenu">
+          <span id="imageUrlHeader" class="greyBg">Paste Image URL</span>
+          <span id="imageFileHeader" class="whiteBg">Upload An Image</span>
+        </div>
+
+        <div class="imageLoaderContents" id="imageUrlLoader">
+          <form class="imageUrlLoaderForm" id="imageUrlLoaderForm">
+            <input
+              type="url"
+              name="url"
+              id="imageUrlInput"
+              placeholder="Image URL"
+            />
+            <button>Search by image</button>
+          </form>
+        </div>
+
+        <div class="imageLoaderContents hide" id="imageFileLoader"></div>
+
+        <button id="imageLoaderClose" class="imageLoaderClose">
+          <img src="img/close.svg" />
         </button>
       </div>
-    </form>
-
+    </div>
     <script type="module" src="./main.js"></script>
   </body>
 </html>

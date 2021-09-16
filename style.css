@@ -3,9 +3,16 @@ body {
   max-width: 600px;
   margin: 0 auto;
 }
+.container {
+  position: relative;
+  margin-top: 15vh;
+}
+
+.hide {
+  display: none;
+}
 
 .logo {
-  padding-top: 15vh;
   width: 360px;
   display: block;
   margin: 0 auto;
@@ -18,7 +25,7 @@ body {
   color: #2e2e2e;
 }
 
-form {
+.searchForm {
   width: 80%;
   height: 40px;
   margin: 0 auto;
@@ -28,6 +35,9 @@ form {
   display: flex;
   align-items: center;
 }
+.searchForm:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
 
 .url {
   width: calc(100% - 100px);
@@ -35,7 +45,7 @@ form {
   display: flex;
 }
 
-form span {
+.searchForm span {
   flex: 1;
   margin: 0 15px;
   color: #757575;
@@ -72,11 +82,98 @@ input:focus {
   height: 100%;
 }
 
+.imageLoader {
+  border: 1px solid #dfe1e5;
+  border-radius: 2px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  position: absolute;
+  top: 160px;
+  width: 80%;
+  left: 10%;
+}
+.imageLoader p {
+  margin: 0;
+}
+.imageLoaderHeader {
+  font-weight: bold;
+  padding: 20px 0 0 20px;
+}
+.imageLoaderDesc {
+  color: #2e2e2e;
+  font-size: 0.8rem;
+  padding: 0 0 20px 20px;
+}
+.imageLoaderMenu {
+  width: calc(100% - 20px);
+  padding-left: 20px;
+}
+.imageLoaderMenu span {
+  width: 100px;
+  padding: 2px 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.whiteBg {
+  color: #585858;
+  border: none;
+}
+.whiteBg:hover {
+  color: #000;
+}
+.greyBg {
+  background: #f5f5f5;
+  border: 1px solid #dfe1e5;
+  border-bottom: none;
+  color: #000;
+}
+.imageLoaderContents {
+  width: 100%;
+  border-top: 1px solid #dfe1e5;
+  background: #f5f5f5;
+}
+.imageLoaderClose {
+  cursor: pointer;
+  border: none;
+  background: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.imageUrlLoaderForm {
+  padding: 20px;
+  width: calc(100% - 40px);
+  display: flex;
+}
+.imageUrlLoaderForm input {
+  border-radius: 2px;
+  padding: 5px 10px;
+  margin-right: 20px;
+}
+
+.imageUrlLoaderForm button {
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  font-size: 0.8rem;
+  padding: 5px;
+  color: #fff;
+  background-color: #4285f4;
+  background-image: -webkit-linear-gradient(top, #4d90fe, #4787ed);
+}
+
 @media only screen and (max-width: 768px) {
   .logo {
     width: 220px;
   }
-  form {
+  .searchForm {
     width: 90%;
+  }
+  .imageLoader {
+    top: 120px;
+    width: 90%;
+    left: 5%;
   }
 }
