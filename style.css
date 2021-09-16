@@ -40,20 +40,24 @@ body {
 }
 
 .url {
-  width: calc(100% - 100px);
+  width: calc(100% - 70px);
   margin-right: auto;
   display: flex;
 }
 
-.searchForm span {
-  flex: 1;
-  margin: 0 15px;
-  color: #757575;
+.search-icon {
+  width: 25px;
+  height: 25px;
+  padding: 0 15px;
   cursor: default;
+}
+.search-icon img {
+  width: 25px;
+  height: 25px;
 }
 
 input {
-  flex: 9;
+  width: 100%;
   border: none;
 }
 
@@ -62,7 +66,7 @@ input:focus {
 }
 
 .buttonWrapper {
-  width: 100px;
+  width: 70px;
   height: 25px;
   display: flex;
 }
@@ -70,16 +74,15 @@ input:focus {
 .button {
   border: none;
   padding: 0;
-  margin-right: 20px;
+  margin-right: 10px;
   width: 25px;
   height: 25px;
   background: none;
   cursor: pointer;
 }
-
 .button img {
-  width: 100%;
-  height: 100%;
+  width: 25px;
+  height: 25px;
 }
 
 .imageLoader {
@@ -128,11 +131,50 @@ input:focus {
   border-bottom: none;
   color: #000;
 }
-.imageLoaderContents {
+.image-loader {
+  height: 70px;
   width: 100%;
   border-top: 1px solid #dfe1e5;
   background: #f5f5f5;
 }
+
+.imageUrlLoader {
+  padding: 20px;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  display: flex;
+}
+.imageUrlLoader input {
+  border-radius: 2px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.imageUrlLoader button {
+  cursor: pointer;
+  border: none;
+  border-radius: 2px;
+  font-size: 0.8rem;
+  padding: 2px;
+  color: #fff;
+  background-color: #4285f4;
+  background-image: -webkit-linear-gradient(top, #4d90fe, #4787ed);
+}
+
+.imageFileLoader {
+  padding: 20px;
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+.imageFileLoader button {
+  margin-right: 10px;
+}
+
 .imageLoaderClose {
   cursor: pointer;
   border: none;
@@ -140,28 +182,6 @@ input:focus {
   position: absolute;
   top: 10px;
   right: 10px;
-}
-
-.imageUrlLoaderForm {
-  padding: 20px;
-  width: calc(100% - 40px);
-  display: flex;
-}
-.imageUrlLoaderForm input {
-  border-radius: 2px;
-  padding: 5px 10px;
-  margin-right: 20px;
-}
-
-.imageUrlLoaderForm button {
-  cursor: pointer;
-  border: none;
-  border-radius: 2px;
-  font-size: 0.8rem;
-  padding: 5px;
-  color: #fff;
-  background-color: #4285f4;
-  background-image: -webkit-linear-gradient(top, #4d90fe, #4787ed);
 }
 
 @media only screen and (max-width: 768px) {
