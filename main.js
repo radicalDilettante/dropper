@@ -1,3 +1,5 @@
+const container = document.getElementById("container");
+
 const searchForm = document.getElementById("searchForm");
 
 const urlInput = document.getElementById("urlInput");
@@ -15,6 +17,43 @@ const imageFileLoader = document.getElementById("imageFileLoader");
 
 const imageFileClose = document.getElementById("imageFileClose");
 
+const result = document.getElementById("result");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const resultClose = document.getElementById("resultClose");
+
+// Image load
+function drawImageFromRes(res) {
+  const img = new Image();
+  img.setAttribute("src", window.URL.createObjectURL(res));
+
+  const canvasWidth = result.offsetWidth - 30;
+
+  img.addEventListener("load", function () {
+    canvas.setAttribute("width", canvasWidth);
+    canvas.setAttribute("height", (canvasWidth / img.width) * img.height);
+    ctx.drawImage(
+      img,
+      0,
+      0,
+      img.width,
+      img.height,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+  });
+}
+
+// Get Screenshot
+async function getScreenshot(url) {
+  await fetch(`http://localhost:8080/screenshot?url=${url}`).then((res) =>
+    res.blob().then((res) => {
+      drawImageFromRes(res);
+    })
+  );
+}
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let url;
@@ -23,7 +62,9 @@ searchForm.addEventListener("submit", (e) => {
   } else {
     url = urlInput.value;
   }
-  // Load Image
+  container.classList.add("hide");
+  result.classList.remove("hide");
+  getScreenshot(url);
 });
 
 cameraButton.addEventListener("click", (e) => {
@@ -65,3 +106,48 @@ imageUrlLoaderForm.addEventListener("submit", (e) => {
   }
   // Load Image
 });
+
+resultClose.addEventListener("click", (e) => {
+  e.preventDefault();
+  container.classList.remove("hide");
+  result.classList.add("hide");
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+});
+
+function getPosition(obj) {
+  let curLeft = 0,
+    curTop = 0;
+  if (obj.offsetParent) {
+    do {
+      curLeft += obj.offsetLeft;
+      curTop += obj.offsetTop;
+    } while ((obj = obj.offsetParent));
+    return { x: curLeft, y: curTop };
+  }
+  return undefined;
+}
+function rgbToHex(r, g, b) {
+  if (r > 255 || g > 255 || b > 255) throw "Invalid color component";
+  return ((r << 16) | (g << 8) | b).toString(16);
+}
+canvas.addEventListener(
+  "mousemove",
+  function (e) {
+    let pos = getPosition(this);
+    let x = e.pageX - pos.x;
+    let y = e.pageY - pos.y;
+    let coord = "x=" + x + ", y=" + y;
+    let c = this.getContext("2d");
+    let p = c.getImageData(x, y, 1, 1).data;
+
+    if (p[0] == 0 && p[1] == 0 && p[2] == 0 && p[3] == 0) {
+      coord += " (Transparent color detected, cannot be converted to HEX)";
+    }
+
+    let hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+
+    document.getElementById("status").innerHTML = coord;
+    document.getElementById("color").style.backgroundColor = hex;
+  },
+  false
+);
