@@ -48,10 +48,11 @@ function drawImageFromRes(res) {
 
 // Get Screenshot
 async function getScreenshot(url) {
-  await fetch(`http://localhost:8080/screenshot?url=${url}`).then((res) =>
-    res.blob().then((res) => {
-      drawImageFromRes(res);
-    })
+  await fetch(`http://apiwayne.herokuapp.com/screenshot?url=${url}`).then(
+    (res) =>
+      res.blob().then((res) => {
+        drawImageFromRes(res);
+      })
   );
 }
 searchForm.addEventListener("submit", (e) => {
