@@ -48,7 +48,7 @@ function drawImageFromRes(res) {
 
 // Get Screenshot
 async function getScreenshot(url) {
-  await fetch(`http://apiwayne.herokuapp.com/screenshot?url=${url}`).then(
+  await fetch(`https://apiwayne.herokuapp.com/screenshot?url=${url}`).then(
     (res) =>
       res.blob().then((res) => {
         drawImageFromRes(res);
