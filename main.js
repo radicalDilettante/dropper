@@ -19,6 +19,7 @@ const imageFileInput = document.getElementById("imageFileInput");
 const imageFileClose = document.getElementById("imageFileClose");
 
 const result = document.getElementById("result");
+const spinner = document.getElementById("spinner");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const circle = document.getElementById("circle");
@@ -47,6 +48,7 @@ function alert(txt, error) {
 function drawImage(src) {
   const img = new Image();
   img.crossOrigin = "";
+  spinner.style.display = "none";
   img.setAttribute("src", src);
   img.onerror = () => {
     alert(
@@ -103,29 +105,30 @@ searchForm.addEventListener("submit", (e) => {
   } else {
     url = urlInput.value;
   }
-  container.classList.add("hide");
-  result.classList.remove("hide");
+  container.style.display = "none";
+  result.style.display = "flex";
   getScreenshot(url);
 });
 
 cameraButton.addEventListener("click", (e) => {
   e.preventDefault();
-  imageFile.classList.remove("hide");
+  imageFile.style.display = "flex";
+});
+imageFileClose.addEventListener("click", (e) => {
+  e.preventDefault();
+  imageFile.style.display = "none";
 });
 
 // Get Image
-imageFileClose.addEventListener("click", (e) => {
-  e.preventDefault();
-  imageFile.classList.add("hide");
-});
+
 imageUrlHeader.addEventListener("click", (e) => {
   e.preventDefault();
   imageUrlHeader.classList.remove("white-bg");
   imageUrlHeader.classList.add("grey-bg");
   imageFileHeader.classList.remove("grey-bg");
   imageFileHeader.classList.add("white-bg");
-  imageUrlLoader.classList.remove("hide");
-  imageFileLoader.classList.add("hide");
+  imageUrlLoader.style.display = "flex";
+  imageFileLoader.style.display = "none";
 });
 imageFileHeader.addEventListener("click", (e) => {
   e.preventDefault();
@@ -133,15 +136,12 @@ imageFileHeader.addEventListener("click", (e) => {
   imageFileHeader.classList.add("grey-bg");
   imageUrlHeader.classList.remove("grey-bg");
   imageUrlHeader.classList.add("white-bg");
-  imageFileLoader.classList.remove("hide");
-  imageUrlLoader.classList.add("hide");
+  imageFileLoader.style.display = "flex";
+  imageUrlLoader.style.display = "none";
 });
 resultClose.addEventListener("click", (e) => {
   e.preventDefault();
   window.location.reload();
-  // container.classList.remove("hide");
-  // result.classList.add("hide");
-  // ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
 // Image from URL
@@ -153,8 +153,8 @@ imageUrlLoaderForm.addEventListener("submit", (e) => {
       true
     );
   } else {
-    container.classList.add("hide");
-    result.classList.remove("hide");
+    container.style.display = "none";
+    result.style.display = "flex";
     drawImage(imageUrlInput.value);
   }
 });
@@ -164,8 +164,8 @@ imageFileInput.addEventListener("change", function () {
   if (this.files[0].type.indexOf("image") < 0) {
     alert("An error has occurred! Please check your file.", true);
   } else {
-    container.classList.add("hide");
-    result.classList.remove("hide");
+    container.style.display = "none";
+    result.style.display = "flex";
     drawImage(window.URL.createObjectURL(this.files[0]));
   }
 });

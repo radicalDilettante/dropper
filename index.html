@@ -30,7 +30,7 @@
         </div>
       </form>
 
-      <div class="image-file hide" id="imageFile">
+      <div class="image-file" id="imageFile">
         <p class="image-file_header">Search by image</p>
         <p class="image-file_desc">
           Choose an image from URL or local file instead of website. Try
@@ -41,8 +41,8 @@
           <span class="white-bg" id="imageFileHeader">Upload An Image</span>
         </div>
 
-        <div class="image-file_loader" id="imageUrlLoader">
-          <form class="image-file_loader_url" id="imageUrlLoaderForm">
+        <div class="image-file_loader_url" id="imageUrlLoader">
+          <form id="imageUrlLoaderForm">
             <input
               type="url"
               name="url"
@@ -55,8 +55,8 @@
           </form>
         </div>
 
-        <div class="image-file_loader hide" id="imageFileLoader">
-          <div class="image-file_loader_local">
+        <div class="image-file_loader_local" id="imageFileLoader">
+          <div>
             <input type="file" id="imageFileInput"></input>
           </div>
         </div>
@@ -66,7 +66,7 @@
         </button>
       </div>
     </div>
-    <div class="result hide" id="result">
+    <div class="result" id="result">
       <div class="result_header">
         <img class="result_logo" src="img/logo.png" />
         <button class="close" id="resultClose">
@@ -74,7 +74,11 @@
         </button>
       </div>
       <div class="canvas-wrapper">
-        <canvas class="canvas" id="canvas"></canvas>
+        <div class="spinner_container" id="spinner">
+          <div class="spinner"></div>
+        </div>
+        <canvas class="canvas" id="canvas">
+        </canvas>
         <div class="circle" id="circle"></div>
       </div>
       <div class="result_status">
