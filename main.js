@@ -84,19 +84,19 @@ imageFileClose.addEventListener("click", (e) => {
 
 imageUrlHeader.addEventListener("click", (e) => {
   e.preventDefault();
-  imageUrlHeader.classList.remove("whiteBg");
-  imageUrlHeader.classList.add("greyBg");
-  imageFileHeader.classList.remove("greyBg");
-  imageFileHeader.classList.add("whiteBg");
+  imageUrlHeader.classList.remove("white-bg");
+  imageUrlHeader.classList.add("grey-bg");
+  imageFileHeader.classList.remove("grey-bg");
+  imageFileHeader.classList.add("white-bg");
   imageUrlLoader.classList.remove("hide");
   imageFileLoader.classList.add("hide");
 });
 imageFileHeader.addEventListener("click", (e) => {
   e.preventDefault();
-  imageFileHeader.classList.remove("whiteBg");
-  imageFileHeader.classList.add("greyBg");
-  imageUrlHeader.classList.remove("greyBg");
-  imageUrlHeader.classList.add("whiteBg");
+  imageFileHeader.classList.remove("white-bg");
+  imageFileHeader.classList.add("grey-bg");
+  imageUrlHeader.classList.remove("grey-bg");
+  imageUrlHeader.classList.add("white-bg");
   imageFileLoader.classList.remove("hide");
   imageUrlLoader.classList.add("hide");
 });

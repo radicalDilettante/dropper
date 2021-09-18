@@ -2,6 +2,7 @@ body {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  position: relative;
 }
 .container {
   margin-top: 15vh;
@@ -19,6 +20,9 @@ body {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+.close:hover {
+  transform: scale(1.1);
 }
 
 .logo {
@@ -87,6 +91,9 @@ body {
   background: none;
   cursor: pointer;
 }
+.search-form_button:hover {
+  transform: scale(1.1);
+}
 .search-form_button img {
   width: 25px;
   height: 25px;
@@ -103,6 +110,7 @@ body {
   top: 160px;
   width: 80%;
   left: 10%;
+  animation: scale-up 0.1s;
 }
 .image-file p {
   margin: 0;
@@ -164,6 +172,12 @@ body {
   display: flex;
   align-items: center;
 }
+.image-file_loader_url input:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+.image-file_loader_url input:focus {
+  outline: none;
+}
 
 .image-file_loader_url button {
   cursor: pointer;
@@ -174,6 +188,10 @@ body {
   color: #fff;
   background-color: #4285f4;
   background-image: -webkit-linear-gradient(top, #4d90fe, #4787ed);
+}
+
+.image-file_loader_url button:hover {
+  transform: scale(1.1);
 }
 
 .image-file_loader_local {
@@ -196,6 +214,7 @@ body {
   border: 1px solid #dfe1e5;
   border-radius: 2px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  animation: scale-up 0.1s;
 }
 .result_header {
   width: 100%;
@@ -284,6 +303,26 @@ body {
   width: 100%;
   padding: 10px;
   bottom: 0;
+  animation: fade-in 3s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes scale-up {
+  0% {
+    transform: scale(0.8) translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
 }
 
 @media only screen and (max-width: 768px) {
