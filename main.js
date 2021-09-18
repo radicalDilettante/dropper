@@ -20,6 +20,11 @@ const imageFileClose = document.getElementById("imageFileClose");
 const result = document.getElementById("result");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+const circle = document.getElementById("circle");
+const color = document.getElementById("color");
+const currentColor = document.getElementById("currentColor");
+const hex = document.getElementById("hex");
+const rgb = document.getElementById("rgb");
 const resultClose = document.getElementById("resultClose");
 
 // Image load
@@ -113,27 +118,35 @@ resultClose.addEventListener("click", (e) => {
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
-function rgbToHex(r, g, b) {
-  if (r > 255 || g > 255 || b > 255) throw "Invalid color component";
-  return ((r << 16) | (g << 8) | b).toString(16);
+function getHexCode(imgData) {
+  const rgbToHex = (r, g, b) => ((r << 16) | (g << 8) | b).toString(16);
+  return (
+    "#" + ("000000" + rgbToHex(imgData[0], imgData[1], imgData[2])).slice(-6)
+  );
 }
-canvas.addEventListener(
-  "mousemove",
-  function (e) {
-    let x = e.offsetX;
-    let y = e.offsetY;
-    let coord = "x=" + x + ", y=" + y;
-    let c = this.getContext("2d");
-    let p = c.getImageData(x, y, 1, 1).data;
+canvas.addEventListener("mousemove", (e) => {
+  const imgData = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data;
+  const hexCode = getHexCode(imgData);
 
-    if (p[0] == 0 && p[1] == 0 && p[2] == 0 && p[3] == 0) {
-      coord += " (Transparent color detected, cannot be converted to HEX)";
-    }
-
-    let hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-
-    document.getElementById("status").innerHTML = coord;
-    document.getElementById("color").style.backgroundColor = hex;
-  },
-  false
-);
+  if (
+    !/Android|webOS|iPhone|iPad|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  ) {
+    circle.style.backgroundColor = hexCode;
+    circle.style.left = e.pageX + "px";
+    circle.style.top = e.pageY + "px";
+  }
+  currentColor.style.backgroundColor = hexCode;
+});
+canvas.addEventListener("click", (e) => {
+  const imgData = ctx.getImageData(e.offsetX, e.offsetY, 1, 1).data;
+  const hexCode = getHexCode(imgData);
+  const rgbCode = `(${imgData[0]},${imgData[1]},${imgData[2]})`;
+  color.style.backgroundColor = hexCode;
+  hex.innerText = `HEX: ${hexCode}`;
+  rgb.innerText = `RGB: ${rgbCode}`;
+});
+canvas.addEventListener("mouseout", () => {
+  circle.style.backgroundColor = "transparent";
+});
