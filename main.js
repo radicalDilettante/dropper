@@ -26,10 +26,8 @@ const resultClose = document.getElementById("resultClose");
 function drawImageFromRes(res) {
   const img = new Image();
   img.setAttribute("src", window.URL.createObjectURL(res));
-
-  const canvasWidth = result.offsetWidth - 30;
-
-  img.addEventListener("load", function () {
+  img.addEventListener("load", () => {
+    const canvasWidth = result.offsetWidth - 30;
     canvas.setAttribute("width", canvasWidth);
     canvas.setAttribute("height", (canvasWidth / img.width) * img.height);
     ctx.drawImage(
@@ -45,7 +43,6 @@ function drawImageFromRes(res) {
     );
   });
 }
-
 // Get Screenshot
 async function getScreenshot(url) {
   await fetch(`https://apiwayne.herokuapp.com/screenshot?url=${url}`).then(
@@ -110,9 +107,10 @@ imageUrlLoaderForm.addEventListener("submit", (e) => {
 
 resultClose.addEventListener("click", (e) => {
   e.preventDefault();
-  container.classList.remove("hide");
-  result.classList.add("hide");
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  window.location.reload();
+  // container.classList.remove("hide");
+  // result.classList.add("hide");
+  // ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
 function getPosition(obj) {
