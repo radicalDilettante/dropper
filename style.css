@@ -2,7 +2,6 @@ body {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  position: relative;
 }
 .container {
   margin-top: 15vh;
@@ -300,9 +299,10 @@ body {
   background: #505050;
   color: #d4d4d4;
   position: absolute;
-  width: 100%;
+  width: calc(100% - 20px);
   padding: 10px;
   bottom: 0;
+  left: 0;
   animation: fade-in 3s;
 }
 

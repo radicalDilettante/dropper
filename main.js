@@ -29,10 +29,21 @@ const hexCopy = document.getElementById("hexCopy");
 const rgbCopy = document.getElementById("rgbCopy");
 const resultClose = document.getElementById("resultClose");
 
+function alert(txt) {
+  const alert = document.createElement("div");
+  alert.innerHTML = txt;
+  alert.classList.add("alert");
+  document.body.appendChild(alert);
+  setTimeout(() => {
+    alert.remove();
+  }, 5000);
+}
+
 // Image load
-function drawImageFromRes(res) {
+function drawImage(src) {
   const img = new Image();
-  img.setAttribute("src", window.URL.createObjectURL(res));
+  img.crossOrigin = "";
+  img.setAttribute("src", src);
   img.addEventListener("load", () => {
     const canvasWidth = result.offsetWidth - 30;
     canvas.setAttribute("width", canvasWidth);
@@ -52,12 +63,22 @@ function drawImageFromRes(res) {
 }
 // Get Screenshot
 async function getScreenshot(url) {
-  await fetch(`https://apiwayne.herokuapp.com/screenshot?url=${url}`).then(
-    (res) =>
+  await fetch(`https://apiwayne.herokuapp.com/screenshot?url=${url}`)
+    .then((res) => {
+      if (res.status >= 400) {
+        throw new Error();
+      } else {
+        return res;
+      }
+    })
+    .then((res) =>
       res.blob().then((res) => {
-        drawImageFromRes(res);
+        drawImage(window.URL.createObjectURL(res));
       })
-  );
+    )
+    .catch(() => {
+      alert("An error has occurred! Please check your url or try again later.");
+    });
 }
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -77,11 +98,11 @@ cameraButton.addEventListener("click", (e) => {
   imageFile.classList.remove("hide");
 });
 
+// Get Image File
 imageFileClose.addEventListener("click", (e) => {
   e.preventDefault();
   imageFile.classList.add("hide");
 });
-
 imageUrlHeader.addEventListener("click", (e) => {
   e.preventDefault();
   imageUrlHeader.classList.remove("white-bg");
@@ -103,13 +124,13 @@ imageFileHeader.addEventListener("click", (e) => {
 
 imageUrlLoaderForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  let url;
+  container.classList.add("hide");
+  result.classList.remove("hide");
   if (imageUrlInput.value === "") {
-    url = imageUrlInput.placeholder;
+    alert("An error has occurred! Please check your url or try again later.");
   } else {
-    url = imageUrlInput.value;
+    drawImage(imageUrlInput.value);
   }
-  // Load Image
 });
 
 resultClose.addEventListener("click", (e) => {
@@ -155,13 +176,7 @@ canvas.addEventListener("mouseout", () => {
 
 function clipboard(txt) {
   navigator.clipboard.writeText(txt);
-  const alert = document.createElement("div");
-  alert.innerHTML = `Copied the text: ${txt}`;
-  alert.classList.add("alert");
-  document.body.appendChild(alert);
-  setTimeout(() => {
-    alert.remove();
-  }, 2000);
+  alert(`Copied the text: ${txt}`);
 }
 hexCopy.addEventListener("click", () => {
   clipboard(hex.innerText);
