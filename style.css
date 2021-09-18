@@ -126,10 +126,13 @@ body {
 .image-file_menu {
   width: calc(100% - 20px);
   padding-left: 20px;
+  display: flex;
 }
 .image-file_menu span {
-  width: 100px;
-  padding: 2px 10px;
+  transform: translate(0, 2px);
+  width: 120px;
+  text-align: center;
+  padding: 5px 10px;
   font-size: 0.8rem;
   font-weight: bold;
   cursor: pointer;
