@@ -201,9 +201,6 @@ body {
   display: flex;
   align-items: center;
 }
-.image-file_loader_local button {
-  margin-right: 10px;
-}
 
 /* Canvas */
 
