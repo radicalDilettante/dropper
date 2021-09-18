@@ -152,17 +152,20 @@ canvas.addEventListener("click", (e) => {
 canvas.addEventListener("mouseout", () => {
   circle.style.backgroundColor = "transparent";
 });
-hexCopy.addEventListener("click", () => {
-  navigator.clipboard.writeText(hex.innerText);
+
+function clipboard(txt) {
+  navigator.clipboard.writeText(txt);
   const alert = document.createElement("div");
-  alert.innerHTML = `Copied the text: ${hex.innerText}`;
+  alert.innerHTML = `Copied the text: ${txt}`;
   alert.classList.add("alert");
   document.body.appendChild(alert);
   setTimeout(() => {
     alert.remove();
   }, 2000);
+}
+hexCopy.addEventListener("click", () => {
+  clipboard(hex.innerText);
 });
 rgbCopy.addEventListener("click", () => {
-  navigator.clipboard.writeText(rgb.innerText);
-  alert("Copied the text: " + rgb.innerText);
+  clipboard(rgb.innerText);
 });
