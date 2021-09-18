@@ -25,6 +25,8 @@ const color = document.getElementById("color");
 const currentColor = document.getElementById("currentColor");
 const hex = document.getElementById("hex");
 const rgb = document.getElementById("rgb");
+const hexCopy = document.getElementById("hexCopy");
+const rgbCopy = document.getElementById("rgbCopy");
 const resultClose = document.getElementById("resultClose");
 
 // Image load
@@ -144,9 +146,23 @@ canvas.addEventListener("click", (e) => {
   const hexCode = getHexCode(imgData);
   const rgbCode = `(${imgData[0]},${imgData[1]},${imgData[2]})`;
   color.style.backgroundColor = hexCode;
-  hex.innerText = `HEX: ${hexCode}`;
-  rgb.innerText = `RGB: ${rgbCode}`;
+  hex.innerText = hexCode;
+  rgb.innerText = rgbCode;
 });
 canvas.addEventListener("mouseout", () => {
   circle.style.backgroundColor = "transparent";
+});
+hexCopy.addEventListener("click", () => {
+  navigator.clipboard.writeText(hex.innerText);
+  const alert = document.createElement("div");
+  alert.innerHTML = `Copied the text: ${hex.innerText}`;
+  alert.classList.add("alert");
+  document.body.appendChild(alert);
+  setTimeout(() => {
+    alert.remove();
+  }, 2000);
+});
+rgbCopy.addEventListener("click", () => {
+  navigator.clipboard.writeText(rgb.innerText);
+  alert("Copied the text: " + rgb.innerText);
 });

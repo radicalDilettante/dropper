@@ -270,7 +270,20 @@ body {
   border: 1px solid #dfe1e5;
 }
 .result_status_codes img {
+  cursor: pointer;
   height: 0.8rem;
+}
+.result_status_codes img:hover {
+  transform: scale(1.1);
+}
+
+.alert {
+  background: #505050;
+  color: #d4d4d4;
+  position: absolute;
+  width: 100%;
+  padding: 10px;
+  bottom: 0;
 }
 
 @media only screen and (max-width: 768px) {
