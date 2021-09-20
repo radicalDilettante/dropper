@@ -75,28 +75,24 @@ function drawImage(src) {
   });
 }
 // Get Screenshot
+
 async function getScreenshot(url) {
-  await fetch(`https://apiwayne.herokuapp.com/screenshot?url=${url}`)
-    .then((res) => {
-      if (res.status >= 400) {
-        throw new Error();
-      } else {
-        return res;
-      }
-    })
-    .then((res) =>
-      res.blob().then((res) => {
-        drawImage(window.URL.createObjectURL(res));
-      })
-    )
-    .catch(() => {
-      drawImage("img/error.png");
-      alert(
-        "An error has occurred! Please check your url or try again later.",
-        true
-      );
-    });
+  const response = await fetch(
+    `https://apiwayne.herokuapp.com/screenshot?url=${url}`
+  );
+  if (response.status >= 400) {
+    drawImage("img/error.png");
+    alert(
+      "An error has occurred! Please check your url or try again later.",
+      true
+    );
+  } else {
+    const myBlob = await response.blob();
+    const imgURL = URL.createObjectURL(myBlob);
+    drawImage(imgURL);
+  }
 }
+
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let url;
