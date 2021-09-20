@@ -32,8 +32,8 @@ const rgb = document.getElementById("rgb");
 const hexCopy = document.getElementById("hexCopy");
 const rgbCopy = document.getElementById("rgbCopy");
 
-// alert
-function alert(txt, isError) {
+// Alert
+function alertMessage(txt, isError) {
   const alertElement = document.createElement("div");
   alertElement.innerHTML = txt;
   alertElement.classList.add("alert");
@@ -85,7 +85,7 @@ async function getScreenshot(url) {
   let imgURL;
   if (response.status >= 400) {
     imgURL = "img/error.png";
-    alert(
+    alertMessage(
       "An error has occurred! Please check your url or try again later.",
       true
     );
@@ -120,7 +120,7 @@ imageFileClose.addEventListener("click", (e) => {
 imageUrlLoaderForm.addEventListener("submit", (e) => {
   e.preventDefault();
   if (imageUrlInput.value === "") {
-    alert(
+    alertMessage(
       "An error has occurred! Please check your url or try again later.",
       true
     );
@@ -133,7 +133,7 @@ imageUrlLoaderForm.addEventListener("submit", (e) => {
 
 imageFileInput.addEventListener("change", function () {
   if (this.files[0].type.indexOf("image") < 0) {
-    alert("An error has occurred! Please check your file.", true);
+    alertMessage("An error has occurred! Please check your file.", true);
   } else {
     container.style.display = "none";
     result.style.display = "flex";
@@ -201,7 +201,7 @@ canvas.addEventListener("mouseout", () => {
 
 function clipboard(txt) {
   navigator.clipboard.writeText(txt);
-  alert(`Copied the text: ${txt}`);
+  alertMessage(`Copied the text: ${txt}`);
 }
 hexCopy.addEventListener("click", () => {
   clipboard(hex.innerText);
