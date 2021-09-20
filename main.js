@@ -1,11 +1,12 @@
+//DOM elements for Layout
 const container = document.getElementById("container");
-
 const searchForm = document.getElementById("searchForm");
 
 const urlInput = document.getElementById("urlInput");
 const cameraButton = document.getElementById("cameraButton");
 
 const imageFile = document.getElementById("imageFile");
+const imageFileClose = document.getElementById("imageFileClose");
 
 const imageUrlHeader = document.getElementById("imageUrlHeader");
 const imageFileHeader = document.getElementById("imageFileHeader");
@@ -16,9 +17,10 @@ const imageUrlInput = document.getElementById("imageUrlInput");
 const imageFileLoader = document.getElementById("imageFileLoader");
 const imageFileInput = document.getElementById("imageFileInput");
 
-const imageFileClose = document.getElementById("imageFileClose");
-
 const result = document.getElementById("result");
+const resultClose = document.getElementById("resultClose");
+
+//DOM elements for image
 const spinner = document.getElementById("spinner");
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -29,22 +31,22 @@ const hex = document.getElementById("hex");
 const rgb = document.getElementById("rgb");
 const hexCopy = document.getElementById("hexCopy");
 const rgbCopy = document.getElementById("rgbCopy");
-const resultClose = document.getElementById("resultClose");
 
-function alert(txt, error) {
-  const alert = document.createElement("div");
-  alert.innerHTML = txt;
-  alert.classList.add("alert");
-  if (error) {
-    alert.style.background = "#fe3a3a";
+// alert
+function alert(txt, isError) {
+  const alertElement = document.createElement("div");
+  alertElement.innerHTML = txt;
+  alertElement.classList.add("alert");
+  if (isError) {
+    alertElement.style.background = "#fe3a3a";
   }
-  document.body.appendChild(alert);
+  document.body.appendChild(alertElement);
   setTimeout(() => {
-    alert.remove();
+    alertElement.remove();
   }, 5000);
 }
 
-// Image load
+// Load image to canvas
 function drawImage(src) {
   const img = new Image();
   img.crossOrigin = "";
@@ -74,8 +76,8 @@ function drawImage(src) {
     );
   });
 }
-// Get Screenshot
 
+// Search Form
 async function getScreenshot(url) {
   const response = await fetch(
     `https://apiwayne.herokuapp.com/screenshot?url=${url}`
@@ -93,7 +95,6 @@ async function getScreenshot(url) {
   }
   drawImage(imgURL);
 }
-
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let url;
@@ -106,7 +107,6 @@ searchForm.addEventListener("submit", (e) => {
   result.style.display = "flex";
   getScreenshot(url);
 });
-
 cameraButton.addEventListener("click", (e) => {
   e.preventDefault();
   imageFile.style.display = "flex";
@@ -116,7 +116,30 @@ imageFileClose.addEventListener("click", (e) => {
   imageFile.style.display = "none";
 });
 
-// Get Image
+// Image File
+imageUrlLoaderForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  if (imageUrlInput.value === "") {
+    alert(
+      "An error has occurred! Please check your url or try again later.",
+      true
+    );
+  } else {
+    container.style.display = "none";
+    result.style.display = "flex";
+    drawImage(imageUrlInput.value);
+  }
+}); // Get image from URL
+
+imageFileInput.addEventListener("change", function () {
+  if (this.files[0].type.indexOf("image") < 0) {
+    alert("An error has occurred! Please check your file.", true);
+  } else {
+    container.style.display = "none";
+    result.style.display = "flex";
+    drawImage(window.URL.createObjectURL(this.files[0]));
+  }
+}); // Get image from local file
 
 imageUrlHeader.addEventListener("click", (e) => {
   e.preventDefault();
@@ -136,35 +159,11 @@ imageFileHeader.addEventListener("click", (e) => {
   imageFileLoader.style.display = "flex";
   imageUrlLoader.style.display = "none";
 });
+
+// Result
 resultClose.addEventListener("click", (e) => {
   e.preventDefault();
   window.location.reload();
-});
-
-// Image from URL
-imageUrlLoaderForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  if (imageUrlInput.value === "") {
-    alert(
-      "An error has occurred! Please check your url or try again later.",
-      true
-    );
-  } else {
-    container.style.display = "none";
-    result.style.display = "flex";
-    drawImage(imageUrlInput.value);
-  }
-});
-
-// Image from Local FIle
-imageFileInput.addEventListener("change", function () {
-  if (this.files[0].type.indexOf("image") < 0) {
-    alert("An error has occurred! Please check your file.", true);
-  } else {
-    container.style.display = "none";
-    result.style.display = "flex";
-    drawImage(window.URL.createObjectURL(this.files[0]));
-  }
 });
 
 function getHexCode(imgData) {
@@ -198,7 +197,7 @@ canvas.addEventListener("click", (e) => {
 });
 canvas.addEventListener("mouseout", () => {
   circle.style.backgroundColor = "transparent";
-});
+}); // Get data from image and  Manipulation
 
 function clipboard(txt) {
   navigator.clipboard.writeText(txt);
@@ -209,4 +208,4 @@ hexCopy.addEventListener("click", () => {
 });
 rgbCopy.addEventListener("click", () => {
   clipboard(rgb.innerText);
-});
+}); // Copy color code
