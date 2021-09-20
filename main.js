@@ -79,10 +79,8 @@ function drawImage(src) {
 }
 
 // Search Form
-async function getScreenshot(url) {
-  const response = await fetch(
-    `https://apiwayne.herokuapp.com/screenshot?url=${url}`
-  );
+async function fetchImage(apiUrl) {
+  const response = await fetch(apiUrl);
   let imgURL;
   if (response.status >= 400) {
     imgURL = "img/error.png";
@@ -106,7 +104,7 @@ searchForm.addEventListener("submit", (e) => {
   }
   container.style.display = "none";
   result.style.display = "flex";
-  getScreenshot(url);
+  fetchImage(`https://apiwayne.herokuapp.com/screenshot?url=${url}`);
 });
 cameraButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -128,7 +126,9 @@ imageUrlLoaderForm.addEventListener("submit", (e) => {
   } else {
     container.style.display = "none";
     result.style.display = "flex";
-    drawImage(imageUrlInput.value);
+    fetchImage(
+      `https://apiwayne.herokuapp.com/image?url=${imageUrlInput.value}`
+    );
   }
 }); // Get image from URL
 
