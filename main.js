@@ -132,6 +132,7 @@ imageUrlLoaderForm.addEventListener("submit", (e) => {
 }); // Get image from URL
 
 imageFileInput.addEventListener("change", function () {
+  e.preventDefault();
   if (this.files[0].type.indexOf("image") < 0) {
     alertMessage("An error has occurred! Please check your file.", true);
   } else {
@@ -204,8 +205,10 @@ function clipboard(txt) {
   alertMessage(`Copied the text: ${txt}`);
 }
 hexCopy.addEventListener("click", () => {
+  e.preventDefault();
   clipboard(hex.innerText);
 });
 rgbCopy.addEventListener("click", () => {
+  e.preventDefault();
   clipboard(rgb.innerText);
 }); // Copy color code
