@@ -51,7 +51,7 @@ function drawImage(src) {
   const img = new Image();
   img.crossOrigin = "Anonymous";
   spinner.style.display = "none";
-  img.src = src + "?not-from-cache-please";
+  img.setAttribute("src", src);
 
   img.onerror = () => {
     alertMessage(
