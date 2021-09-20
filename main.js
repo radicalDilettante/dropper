@@ -49,11 +49,12 @@ function alertMessage(txt, isError) {
 // Load image to canvas
 function drawImage(src) {
   const img = new Image();
-  img.crossOrigin = "";
+  img.crossOrigin = "Anonymous";
   spinner.style.display = "none";
-  img.setAttribute("src", src);
+  img.src = src + "?not-from-cache-please";
+
   img.onerror = () => {
-    alert(
+    alertMessage(
       "An error has occurred! Please check your url or try again later.",
       true
     );
