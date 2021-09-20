@@ -132,7 +132,6 @@ imageUrlLoaderForm.addEventListener("submit", (e) => {
 }); // Get image from URL
 
 imageFileInput.addEventListener("change", function () {
-  e.preventDefault();
   if (this.files[0].type.indexOf("image") < 0) {
     alertMessage("An error has occurred! Please check your file.", true);
   } else {
