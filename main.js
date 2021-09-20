@@ -80,17 +80,18 @@ async function getScreenshot(url) {
   const response = await fetch(
     `https://apiwayne.herokuapp.com/screenshot?url=${url}`
   );
+  let imgURL;
   if (response.status >= 400) {
-    drawImage("img/error.png");
+    imgURL = "img/error.png";
     alert(
       "An error has occurred! Please check your url or try again later.",
       true
     );
   } else {
     const myBlob = await response.blob();
-    const imgURL = URL.createObjectURL(myBlob);
-    drawImage(imgURL);
+    imgURL = URL.createObjectURL(myBlob);
   }
+  drawImage(imgURL);
 }
 
 searchForm.addEventListener("submit", (e) => {
