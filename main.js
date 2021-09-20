@@ -98,7 +98,7 @@ async function getScreenshot(url) {
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   let url;
-  if (urlInput.value === "") {
+  if (!urlInput.value) {
     url = urlInput.placeholder;
   } else {
     url = urlInput.value;
@@ -119,7 +119,7 @@ imageFileClose.addEventListener("click", (e) => {
 // Image File
 imageUrlLoaderForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (imageUrlInput.value === "") {
+  if (!imageUrlInput.value) {
     alertMessage(
       "An error has occurred! Please check your url or try again later.",
       true
@@ -141,21 +141,21 @@ imageFileInput.addEventListener("change", function () {
   }
 }); // Get image from local file
 
+function toggleHeader(curr, prev) {
+  curr.classList.remove("white-bg");
+  curr.classList.add("grey-bg");
+  prev.classList.remove("grey-bg");
+  prev.classList.add("white-bg");
+}
 imageUrlHeader.addEventListener("click", (e) => {
   e.preventDefault();
-  imageUrlHeader.classList.remove("white-bg");
-  imageUrlHeader.classList.add("grey-bg");
-  imageFileHeader.classList.remove("grey-bg");
-  imageFileHeader.classList.add("white-bg");
+  toggleHeader(imageUrlHeader, imageFileHeader);
   imageUrlLoader.style.display = "flex";
   imageFileLoader.style.display = "none";
 });
 imageFileHeader.addEventListener("click", (e) => {
   e.preventDefault();
-  imageFileHeader.classList.remove("white-bg");
-  imageFileHeader.classList.add("grey-bg");
-  imageUrlHeader.classList.remove("grey-bg");
-  imageUrlHeader.classList.add("white-bg");
+  toggleHeader(imageFileHeader, imageUrlHeader);
   imageFileLoader.style.display = "flex";
   imageUrlLoader.style.display = "none";
 });
