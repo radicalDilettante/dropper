@@ -204,11 +204,11 @@ function clipboard(txt) {
   navigator.clipboard.writeText(txt);
   alertMessage(`Copied the text: ${txt}`);
 }
-hexCopy.addEventListener("click", () => {
+hexCopy.addEventListener("click", (e) => {
   e.preventDefault();
   clipboard(hex.innerText);
 });
-rgbCopy.addEventListener("click", () => {
+rgbCopy.addEventListener("click", (e) => {
   e.preventDefault();
   clipboard(rgb.innerText);
 }); // Copy color code
